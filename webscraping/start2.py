@@ -1,15 +1,26 @@
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.chrome.service import service
+# from selenium.webdriver.chrome.service import service
 import time
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
-path='chromedriver.exe'
+# path='chromedriver.exe'
 # services = service(executable_path = path)
 # browser =webdriver.Chrome(service = services)
 
-browser =webdriver.Chrome(executable_path = path)
+# browser =webdriver.Chrome(executable_path = path)
+chrome_option = webdriver.ChromeOptions()
+# chrome_option.add_argument('--headless')
+
+chrome_option.add_argument(r"--user-data-dir=C:\Users\Username\AppData\Local\Google\Chrome\User Data") 
+# chrome_option.add_argument(r'--profile-directory=YourProfileDir') #e.g. Profile 3
+
+# chrome_option.add_argument('--start-maximized')
+# chrome_option.add_argument('--kiosk')
+# chrome_option.add_argument('--start-fullscreen')
+# chrome_option.add_argument('--incognito')
+browser =webdriver.Chrome(options=chrome_option)
 browser.get('https://www.digikala.com/')        
 
 search_div = WebDriverWait(browser, 100).until(EC.visibility_of_element_located((
@@ -30,8 +41,17 @@ search_input.click()
 search_input.send_keys('samsung')
 search_input.send_keys(Keys.ENTER)
 
-browser.close()
-
-driver = webdriver.Chrome(executable_path=path)
-search_key = 'LG'
-driver.get('https://www.digikala.com/search/?q={}'.format(search_key))
+time.sleep(10)
+h3_list =WebDriverWait(browser, 100).until(EC.visibility_of_all_elements_located((By.TAG_NAME , 'h3')))
+text = ''
+for h3 in h3_list:
+   text += str(h3.text)
+   text += '\n'
+   # text += str(h3.get_attribute('innerHTML'))
+   
+# browser.close()
+with open('titles.txt',mode='w+',encoding='UTF-8') as f:
+   f.write(text)
+# driver = webdriver.Chrome(executable_path=path)
+# search_key = 'LG'
+# driver.get('https://www.digikala.com/search/?q={}'.format(search_key))
