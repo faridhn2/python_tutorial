@@ -16,11 +16,12 @@ my_btn = dbc.Button('نمایش جدول',style={'margin-top':'20px'})
 
 @app.callback(
     Output(my_table,component_property='data'),
-    Output(my_btn,component_property='n_clicks'),
+    
     Input(my_btn,component_property='n_clicks')
 )
 def create_table(n_clicks):
-    if n_clicks>0:
+    # print(n_clicks)
+    if n_clicks:
         data =[]
         with open('titles.txt',encoding='utf-8') as f:
             titles = f.read().split('\n')
@@ -28,8 +29,9 @@ def create_table(n_clicks):
             prices = f.read().split('\n')
         for t,p in zip(titles,prices):
             d = {'عنوان':t,'قیمت':' تومان '+p}
+            
             data.append(d)
-        return data , n_clicks
+        return data 
 
 app.layout = dbc.Container(
     
