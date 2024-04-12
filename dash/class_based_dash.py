@@ -1,9 +1,8 @@
-from dash import Dash,dcc , Output, Input # pip install dash
+from dash import Dash , Output, Input # pip install dash
 import dash_bootstrap_components as dbc # pip install dash-bootstrap-components
-import dash_html_components as html # pip install dash-html-components
-import os
+
 import dash_table # pip install dash-table
-import  plotly.graph_objects as go # pip install plotly
+
 
 class MyApp():
     def __init__(self) -> None:
@@ -14,7 +13,7 @@ class MyApp():
             data=[],columns=[],
             style_cell={'color':'black','textAlign':'center'},id='table1'
         )
-        self.app.layout = self.app.layout = dbc.Container(
+        self.app.layout = dbc.Container(
     
         [
         dbc.Row([self.my_table,self.btn],className='text-center')      

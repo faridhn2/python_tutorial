@@ -29,7 +29,7 @@ def create_table(n_clicks):
         image_list = os.listdir('assets/images')
 
         for t,p,l,image_name in zip(titles,prices,links,image_list):
-            img = html.Img(src=app.get_asset_url(f'images/{image_name}'),width='100px',height='100px')
+            img = html.Img(src=app.get_asset_url(f'images/{image_name}'),width='100px',height='100px',style={'border-radius':'20px'})
             d = html.Tr([html.Td(img),html.Td(p),html.A(t,href=l),])
             rows.append(d)
         children = [html.Table(rows,style={'width':'100%'})]
